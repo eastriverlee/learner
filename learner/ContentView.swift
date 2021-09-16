@@ -23,17 +23,31 @@ func SinCos() -> some View {
 	}
 }
 
-func Sigmoid() -> Plotter {
+func SigmoidStep() -> some View {
 	let x = arange(from: -5, to: 5, by: 0.1)
-	let y = sigmoid(x)
-	return Plotter(x, y)
+	let y1 = sigmoid(x)
+	let y2 = step(x)
+	return ZStack {
+		Plotter(x, y1).foregroundColor(.yellow)
+		Plotter(x, y2, line: .dashed(5))
+	}
 }
+
+func ReLU() -> some View {
+	let x = arange(from: -5, to: 5, by: 0.1)
+	let y = relu(x)
+	return ZStack {
+		Plotter(x, y).foregroundColor(.green)
+	}
+}
+
 
 struct ContentView: View {
     var body: some View {
 		VStack {
 			SinCos().border(.white).padding()
-			Sigmoid().border(.white).padding()
+			SigmoidStep().border(.white).padding()
+			ReLU().border(.white).padding()
 		}
     }
 }
