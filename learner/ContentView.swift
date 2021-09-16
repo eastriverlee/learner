@@ -7,47 +7,38 @@
 
 import Foundation
 import SwiftUI
-import SwiftPlot
-import SVGRenderer
-import AGGRenderer
 
-let x = Array(stride(from: Scalar(0), to: 6, by: 0.1))
-let y1 = sin(x)
-let y2 = cos(x)
+func arange(from start: Scalar, to end: Scalar, by step: Scalar = 0.1) -> [Scalar] {
+	Array(stride(from: start, to: end, by: step))
+}
 
-class Plotter {
-	var renderer = SVGRenderer()
-	var graph = LineGraph<Scalar, Scalar>()
+func SinCos() -> some View {
+	let x = arange(from: 0, to: 6, by: 0.1)
+	let y1 = sin(x)
+	let y2 = cos(x)
 	
-	init(_ title: String = "", x: String = "x", y: String = "y") {
-		graph.plotLabel.xLabel = x
-		graph.plotLabel.yLabel = y
-		graph.plotTitle.title = title
-		graph.plotLineThickness = 3.0
-	}
-	
-	func plot(_ x: [Scalar], _ y: [Scalar], label: String = "", color: SwiftPlot.Color = .lightBlue) {
-		graph.addSeries(x, y, label: label, color: color)
-	}
-	func show() -> SVG {
-		let filename = "graph"
-		let path = FileManager.default.currentDirectoryPath
-		try! graph.drawGraphAndOutput(fileName: filename, renderer: renderer)
-		let content = try! String(contentsOf: URL(fileURLWithPath: "\(path)/\(filename).svg"))
-		return SVG(content)
+	return ZStack {
+		Plotter(x, y1).foregroundColor(.red)
+		Plotter(x, y2, line: .dashed(5)).foregroundColor(.blue)
 	}
 }
 
-func Graph(_ title: String) -> SVG {
-	let plotter = Plotter(title)
-	plotter.plot(x, y1, label: "sin", color: .lightBlue)
-	plotter.plot(x, y2, label: "cos", color: .gold)
-	return plotter.show()
+func step(_ x: [Scalar]) -> [Scalar] {
+	return x.map { $0 > 0 }
+}
+
+func Step() -> Plotter {
+	let x = arange(from: -5, to: 5, by: 0.1)
+	let y = step(x)
+	return Plotter(x, y)
 }
 
 struct ContentView: View {
     var body: some View {
-		Graph("svg & cos")
+		VStack {
+			SinCos().border(.white).padding()
+			Step().border(.white).padding()
+		}
     }
 }
 
