@@ -63,6 +63,12 @@ func sin<Element>(_ array: [Element]) -> [Scalar] {
 func cos<Element>(_ array: [Element]) -> [Scalar] {
 	(array.flatten() as! [Scalar]).map { cos($0) }
 }
+func step<Element>(_ array: [Element]) -> [Scalar] {
+	(array.flatten() as! [Scalar]).map { $0 > 0 }
+}
+func sigmoid<Element>(_ array: [Element]) -> [Scalar] {
+	(array.flatten() as! [Scalar]).map { 1 / (1 + exp(-$0)) }
+}
 
 
 extension Array {

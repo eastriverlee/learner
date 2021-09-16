@@ -23,13 +23,9 @@ func SinCos() -> some View {
 	}
 }
 
-func step(_ x: [Scalar]) -> [Scalar] {
-	return x.map { $0 > 0 }
-}
-
-func Step() -> Plotter {
+func Sigmoid() -> Plotter {
 	let x = arange(from: -5, to: 5, by: 0.1)
-	let y = step(x)
+	let y = sigmoid(x)
 	return Plotter(x, y)
 }
 
@@ -37,7 +33,7 @@ struct ContentView: View {
     var body: some View {
 		VStack {
 			SinCos().border(.white).padding()
-			Step().border(.white).padding()
+			Sigmoid().border(.white).padding()
 		}
     }
 }
