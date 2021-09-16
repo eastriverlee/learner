@@ -37,26 +37,26 @@ infix operator ^^
 extension Scalar {
 	static func &&(x1: Scalar, x2: Scalar) -> Scalar {
 		let x: [Scalar] = [x1, x2]
-		let w: [Scalar] = [1, 1]
-		let b: Scalar = -1
+		let w: [Scalar] = [0.5, 0.5]
+		let b: Scalar = -0.7
 		return sum(w*x) + b > 0
 	}
 	static func !&(x1: Scalar, x2: Scalar) -> Scalar {
 		let x: [Scalar] = [x1, x2]
-		let w: [Scalar] = [-1, -1]
-		let b: Scalar = 2
+		let w: [Scalar] = [-0.5, -0.5]
+		let b: Scalar = 0.7
 		return sum(w*x) + b > 0
 	}
 	static func ||(x1: Scalar, x2: Scalar) -> Scalar {
 		let x: [Scalar] = [x1, x2]
-		let w: [Scalar] = [2, 2]
-		let b: Scalar = -1
+		let w: [Scalar] = [0.5, 0.5]
+		let b: Scalar = -0.2
 		return sum(w*x) + b > 0
 	}
 	static func !|(x1: Scalar, x2: Scalar) -> Scalar {
 		let x: [Scalar] = [x1, x2]
-		let w: [Scalar] = [-2, -2]
-		let b: Scalar = 1
+		let w: [Scalar] = [-0.5, -0.5]
+		let b: Scalar = 0.2
 		return sum(w*x) + b > 0
 	}
 	static func ^^(x1: Scalar, x2: Scalar) -> Scalar {
