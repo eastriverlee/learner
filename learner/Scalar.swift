@@ -67,7 +67,7 @@ extension Array where Element == Scalar {
 	static func •(lhs: [Scalar], rhs: [Scalar]) -> Scalar {
 		vDSP.dot(lhs, rhs)
 	}
-	static func •<Element>(lhs: [[Scalar]], rhs: [Element]) -> [Element] {
+	static func •(lhs: [[Scalar]], rhs: [Scalar]) -> [Scalar] {
 		let m = vDSP_Length(lhs.width)
 		let n = vDSP_Length(rhs.height)
 		let p = vDSP_Length(rhs.width)
@@ -76,8 +76,29 @@ extension Array where Element == Scalar {
 		let b = rhs.flatten()
 		var c = [Scalar](count: m*n)
 		vDSP_mmul(a, 1, b, 1, &c, 1, m, n, p)
-		if n == 1 { return c as! [Element] }
-		return c.group(by: n) as! [Element]
+		return c
+	}
+	static func •(lhs: [Scalar], rhs: [[Scalar]]) -> [Scalar] {
+		let m = vDSP_Length(lhs.height)
+		let n = vDSP_Length(rhs.height)
+		let p = vDSP_Length(rhs.width)
+		
+		let a = lhs.flatten()
+		let b = rhs.flatten()
+		var c = [Scalar](count: m*n)
+		vDSP_mmul(a, 1, b, 1, &c, 1, m, n, p)
+		return c
+	}
+	static func •(lhs: [[Scalar]], rhs: [[Scalar]]) -> [[Scalar]] {
+		let m = vDSP_Length(lhs.width)
+		let n = vDSP_Length(rhs.height)
+		let p = vDSP_Length(rhs.width)
+		
+		let a = lhs.flatten()
+		let b = rhs.flatten()
+		var c = [Scalar](count: m*n)
+		vDSP_mmul(a, 1, b, 1, &c, 1, m, n, p)
+		return c.group(by: n)
 	}
 	func max() -> Scalar {
 		vDSP.maximum(self)

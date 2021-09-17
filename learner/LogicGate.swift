@@ -108,4 +108,7 @@ func test() {
 	let d: [Scalar] = [7, 8]
 	print(a • b)
 	print(c • d)
+	let e: [Scalar] = [1, 2]
+	let f: [[Scalar]] = [[1, 3, 5], [2, 4, 6]]
+	print(e • f)
 }
