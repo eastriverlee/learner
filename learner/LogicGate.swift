@@ -103,12 +103,14 @@ func test() {
 	print()
 	
 	let a: [[Scalar]] = [[1, 2], [3, 4]]
-	let b: [[Scalar]] = [[5, 6], [7, 8]]
-	let c: [[Scalar]] = [[1, 2], [3, 4], [5, 6]]
-	let d: [Scalar] = [7, 8]
-	print(a • b)
-	print(c • d)
-	let e: [Scalar] = [1, 2]
-	let f: [[Scalar]] = [[1, 3, 5], [2, 4, 6]]
-	print(e • f)
+	let b: [Scalar] = [7, 8]
+	let A = Tensor(a)
+	let As = Tensor.stack(.init(repeating: A, count: 5))
+	print(A)
+	print(A • A)
+	let B = Tensor(b)
+	let Bs = Tensor.stack(.init(repeating: B, count: 5))
+	print(B)
+	print(A • B)
+	print(As • Bs)
 }

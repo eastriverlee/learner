@@ -13,6 +13,8 @@
 		9BDD648A26F1604300AE7A06 /* Learner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD648726F1604300AE7A06 /* Learner.swift */; };
 		9BDD649D26F2B11800AE7A06 /* LogicGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD649C26F2B11700AE7A06 /* LogicGate.swift */; };
 		9BDD64A126F2CEE900AE7A06 /* Plotter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD64A026F2CEE900AE7A06 /* Plotter.swift */; };
+		9BDD64A326F46DD000AE7A06 /* Tensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD64A226F46DD000AE7A06 /* Tensor.swift */; };
+		9BDD64A526F49B7200AE7A06 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD64A426F49B7200AE7A06 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +27,8 @@
 		9BDD649B26F21B8000AE7A06 /* learner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = learner.entitlements; sourceTree = "<group>"; };
 		9BDD649C26F2B11700AE7A06 /* LogicGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogicGate.swift; sourceTree = "<group>"; };
 		9BDD64A026F2CEE900AE7A06 /* Plotter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plotter.swift; sourceTree = "<group>"; };
+		9BDD64A226F46DD000AE7A06 /* Tensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tensor.swift; sourceTree = "<group>"; };
+		9BDD64A426F49B7200AE7A06 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,8 +65,10 @@
 				9BDD649A26F2193200AE7A06 /* Info.plist */,
 				9BDD648726F1604300AE7A06 /* Learner.swift */,
 				9BDD648526F1604300AE7A06 /* ContentView.swift */,
+				9BDD64A226F46DD000AE7A06 /* Tensor.swift */,
 				9BDD64A026F2CEE900AE7A06 /* Plotter.swift */,
 				9BDD648626F1604300AE7A06 /* Scalar.swift */,
+				9BDD64A426F49B7200AE7A06 /* Extension.swift */,
 				9BDD649C26F2B11700AE7A06 /* LogicGate.swift */,
 				9BDD647A26F1601100AE7A06 /* Assets.xcassets */,
 			);
@@ -143,7 +149,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BDD64A326F46DD000AE7A06 /* Tensor.swift in Sources */,
 				9BDD648926F1604300AE7A06 /* Scalar.swift in Sources */,
+				9BDD64A526F49B7200AE7A06 /* Extension.swift in Sources */,
 				9BDD648826F1604300AE7A06 /* ContentView.swift in Sources */,
 				9BDD649D26F2B11800AE7A06 /* LogicGate.swift in Sources */,
 				9BDD64A126F2CEE900AE7A06 /* Plotter.swift in Sources */,
