@@ -2,10 +2,12 @@ import Foundation
 import Accelerate
 
 typealias Scalar = Float
+typealias Vector = [Scalar]
 
 infix operator .+
-infix operator •
-extension Array where Element == Scalar {
+infix operator •: MultiplicationPrecedence	/// option + 8
+prefix operator ∑							/// option + w
+extension Vector {
 	init(count: Int, as value: Scalar? = nil) {
 		self.init(repeating: value ?? 0, count: count)
 	}
@@ -27,7 +29,7 @@ extension Array where Element == Scalar {
 	static func /(lhs: [Scalar], rhs: [Scalar]) -> [Scalar] {
 		vDSP.divide(lhs, rhs)
 	}
-	static func .+(lhs: [Scalar], rhs: Scalar) -> [Scalar] {
+	static func +(lhs: [Scalar], rhs: Scalar) -> [Scalar] {
 		vDSP.add(rhs, lhs)
 	}
 	static func -(lhs: [Scalar], rhs: Scalar) -> [Scalar] {
@@ -39,11 +41,11 @@ extension Array where Element == Scalar {
 	static func /(lhs: [Scalar], rhs: Scalar) -> [Scalar] {
 		vDSP.divide(lhs, rhs)
 	}
-	static func .+(lhs: Scalar, rhs: [Scalar]) -> [Scalar] {
-		rhs.map { $0 + lhs }
+	static func +(lhs: Scalar, rhs: [Scalar]) -> [Scalar] {
+		vDSP.add(lhs, rhs)
 	}
 	static func -(lhs: Scalar, rhs: [Scalar]) -> [Scalar] {
-		rhs.map { $0 - lhs }
+		vDSP.add(lhs, -rhs)
 	}
 	static func *(lhs: Scalar, rhs: [Scalar]) -> [Scalar] {
 		vDSP.multiply(lhs, rhs)
@@ -53,6 +55,12 @@ extension Array where Element == Scalar {
 	}
 	static func •(lhs: [Scalar], rhs: [Scalar]) -> Scalar {
 		vDSP.dot(lhs, rhs)
+	}
+	static prefix func -(rhs: [Scalar]) -> [Scalar] {
+		vDSP.multiply(-1, rhs)
+	}
+	static prefix func ∑(rhs: [Scalar]) -> Scalar {
+		vDSP.sum(rhs)
 	}
 	func max() -> Scalar {
 		vDSP.maximum(self)
@@ -93,7 +101,7 @@ func step(_ array: [Scalar]) -> [Scalar] {
 	array.map { $0 > 0 }
 }
 func sigmoid(_ array: [Scalar]) -> [Scalar] {
-	return 1 / (1 .+ vForce.exp(array))
+	return 1 / (1 + vForce.exp(-array))
 }
 func relu(_ array: [Scalar]) -> [Scalar] {
 	max(0, array)

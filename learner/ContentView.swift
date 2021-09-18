@@ -57,3 +57,16 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+func test() {
+	let X = Tensor([1, 0.5])
+	let W1 = Tensor([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]])
+	let B1 = Tensor([0.1, 0.2, 0.3])
+	
+	print(B1)
+	print(X•W1)
+	let A1 = X•W1 + B1
+	let Z1 = sigmoid(A1)
+	print(A1)
+	print(Z1)
+}

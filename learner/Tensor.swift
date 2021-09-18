@@ -9,7 +9,7 @@ import Foundation
 import Accelerate
 
 class Tensor {
-	private var _vector: [Scalar]
+	fileprivate var _vector: [Scalar]
 	private var _scalar: Scalar?
 	private var _shape: [UInt] = []
 	private var _dimension: UInt = 0
@@ -97,7 +97,7 @@ extension Tensor {
 	static func •(lhs: Tensor, rhs: Tensor) -> Tensor {
 		let isLeftSmaller = lhs.dimension < rhs.dimension
 		let isRightSmaller = rhs.dimension < lhs.dimension
-		let isSame = !isLeftSmaller || !isRightSmaller
+		let isSame = !isLeftSmaller && !isRightSmaller
 		let m = lhs.height
 		let n = isRightSmaller ? 1 : rhs.width
 		let p = lhs.width
@@ -153,15 +153,18 @@ extension Tensor: CustomStringConvertible {
 	}
 }
 
-func tensor() {
-	let a = Tensor([[[1, 2, 3], [3, 4, 3]] , [[1, 2, 3], [3, 4, 3]]])
-	print(a)
-	print(a.shape)
-	print(a.dimension)
-	let b = Tensor(3)
-	print(b)
-	b.reshape(as: [3, 2])
-	print(b)
-	b.reshape(as: 1)
-	print(b)
+func sigmoid(_ tensor: Tensor) -> Tensor {
+	let result = tensor.copy
+	result._vector = sigmoid(result._vector)
+	return result
+}
+func step(_ tensor: Tensor) -> Tensor {
+	let result = tensor.copy
+	result._vector = step(result._vector)
+	return result
+}
+func relu(_ tensor: Tensor) -> Tensor {
+	let result = tensor.copy
+	result._vector = relu(result._vector)
+	return result
 }
