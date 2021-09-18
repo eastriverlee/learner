@@ -58,15 +58,34 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-func test() {
-	let X = Tensor([1, 0.5])
-	let W1 = Tensor([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]])
-	let B1 = Tensor([0.1, 0.2, 0.3])
+class Brain {
+	var weigth: [Tensor] = []
+	var bias: [Tensor] = []
+}
+
+func forward(_ input: Tensor) -> Tensor {
 	
-	print(B1)
-	print(X•W1)
-	let A1 = X•W1 + B1
-	let Z1 = sigmoid(A1)
-	print(A1)
-	print(Z1)
+	let W1 = Tensor([[0.1, 0.3, 0.5], [0.2, 0.4, 0.6]])
+	let W2 = Tensor([[0.1, 0.4], [0.2, 0.5], [0.3, 0.6]])
+	let W3 = Tensor([[0.1, 0.3], [0.2, 0.4]])
+	
+	let b1 = Tensor([0.1, 0.2, 0.3])
+	let b2 = Tensor([0.1, 0.2])
+	let b3 = Tensor([0.1, 0.2])
+	
+	let a1 = input•W1 + b1
+	let z1 = sigmoid(a1)
+	
+	let a2 = z1•W2 + b2
+	let z2 = sigmoid(a2)
+	
+	let a3 = z2•W3 + b3
+	let output = a3
+	return output
+}
+
+func test() {
+	let input = Tensor([1, 0.5])
+	let output = forward(input)
+	print(output)
 }

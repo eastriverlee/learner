@@ -97,11 +97,14 @@ func sin(_ array: [Scalar]) -> [Scalar] {
 func cos(_ array: [Scalar]) -> [Scalar] {
 	vForce.cos(array)
 }
+func exp(_ array: [Scalar]) -> [Scalar] {
+	vForce.exp(array)
+}
 func step(_ array: [Scalar]) -> [Scalar] {
 	array.map { $0 > 0 }
 }
 func sigmoid(_ array: [Scalar]) -> [Scalar] {
-	return 1 / (1 + vForce.exp(-array))
+	return 1 / (1 + exp(-array))
 }
 func relu(_ array: [Scalar]) -> [Scalar] {
 	max(0, array)
