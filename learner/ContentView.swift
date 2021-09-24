@@ -33,22 +33,34 @@ func SigmoidStep() -> some View {
 	}
 }
 
-func ReLU() -> some View {
+func ReLUSoftmax() -> some View {
 	let x = arange(from: -5, to: 5, by: 0.1)
-	let y = relu(x)
+	let y1 = relu(x)
+	let y2 = softmax(x)
 	return ZStack {
-		Plotter(x, y).foregroundColor(.green)
+		Plotter(x, y1).foregroundColor(.green)
+		Plotter(x, y2, line: .dashed(5)).foregroundColor(.pink)
 	}
 }
 
+let pattern: [Byte] = [255, 0, 0, 0, 0, 255]
+let bytes: [Byte] = [[Byte]](repeating: pattern, count: 20000).flatMap { $0 }
+struct Bmp: View {
+	let bitmap = Bitmap(width: 200, height: 200, bytes: bytes, channel: 3)
+	var body: some View {
+		Image(bitmap)
+			.resizable()
+			.aspectRatio(1, contentMode: .fit)
+	}
+}
 
 struct ContentView: View {
     var body: some View {
 		VStack {
-			SinCos().border(.white).padding()
-			SigmoidStep().border(.white).padding()
-			ReLU().border(.white).padding()
-		}
+			SinCos().border(Color.white).padding()
+			SigmoidStep().border(Color.white).padding()
+			ReLUSoftmax().border(Color.white).padding()
+		}//.background(Bmp())
     }
 }
 
@@ -85,7 +97,9 @@ func forward(_ input: Tensor) -> Tensor {
 }
 
 func test() {
-	let input = Tensor([1, 0.5])
-	let output = forward(input)
+	//let input = Tensor([1, 0.5])
+	let input = Tensor([1010, 1000, 990])
+	
+	let output = softmax(input)
 	print(output)
 }

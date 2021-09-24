@@ -138,7 +138,7 @@ extension Tensor {
 	}
 }
 extension Tensor: CustomStringConvertible {
-	private func reconstruct(as shape: [UInt]) -> Any {
+	func reconstruct(as shape: [UInt]) -> Any {
 		var result: [Any] = vector
 		if let scalar = _scalar {
 			result = [Scalar](count: shape.reduce(1, *), as: scalar)
@@ -166,5 +166,10 @@ func step(_ tensor: Tensor) -> Tensor {
 func relu(_ tensor: Tensor) -> Tensor {
 	let result = tensor.copy
 	result._vector = relu(result._vector)
+	return result
+}
+func softmax(_ tensor: Tensor) -> Tensor {
+	let result = tensor.copy
+	result._vector = softmax(result._vector)
 	return result
 }
