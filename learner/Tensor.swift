@@ -82,6 +82,18 @@ class Tensor {
 	}
 }
 extension Tensor {
+	static func +(lhs: Tensor, rhs: Scalar) -> Tensor {
+		Tensor(lhs.vector + rhs, shape: lhs.shape)
+	}
+	static func -(lhs: Tensor, rhs: Scalar) -> Tensor {
+		Tensor(lhs.vector - rhs, shape: lhs.shape)
+	}
+	static func *(lhs: Tensor, rhs: Scalar) -> Tensor {
+		Tensor(lhs.vector * rhs, shape: lhs.shape)
+	}
+	static func /(lhs: Tensor, rhs: Scalar) -> Tensor {
+		Tensor(lhs.vector / rhs, shape: lhs.shape)
+	}
 	static func +(lhs: Tensor, rhs: Tensor) -> Tensor {
 		Tensor(lhs.vector .+ rhs.vector, shape: lhs.shape)
 	}
@@ -120,6 +132,18 @@ extension Tensor {
 		}
 		return Tensor(result, shape: commonShape + shape)
 	}
+	static func /=(lhs: inout Tensor, rhs: Scalar) {
+		lhs._vector = lhs._vector / rhs
+	}
+	static func *=(lhs: inout Tensor, rhs: Scalar) {
+		lhs._vector = lhs._vector * rhs
+	}
+	static func +=(lhs: inout Tensor, rhs: Scalar) {
+		lhs._vector = lhs._vector + rhs
+	}
+	static func -=(lhs: inout Tensor, rhs: Scalar) {
+		lhs._vector = lhs._vector - rhs
+	}
 	func max() -> Scalar {
 		self.vector.max()
 	}
@@ -138,15 +162,17 @@ extension Tensor {
 	}
 }
 extension Tensor: CustomStringConvertible {
-	func reconstruct(as shape: [UInt]) -> Any {
-		var result: [Any] = vector
+	func reconstruct(as shape_: [UInt] = []) -> Any {
+		var shape = shape_
+		if shape.isEmpty { shape = self.shape }
+		var result: [Scalar] = vector
 		if let scalar = _scalar {
 			result = [Scalar](count: shape.reduce(1, *), as: scalar)
 		}
-		for n in 1..<dimension {
-			result = shape[n] == 1 ? result : result.group(by: shape[n])
-		}
-		return result
+		return result.reconstruct(as: shape)
+	}
+	subscript(i: Int) -> Any {
+		(reconstruct() as! [Any])[i]
 	}
 	var description: String {
 		_scalar != nil ? "\(scalar)" : "\(reconstruct(as: shape))"

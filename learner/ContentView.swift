@@ -43,24 +43,30 @@ func ReLUSoftmax() -> some View {
 	}
 }
 
-let pattern: [Byte] = [255, 0, 0, 0, 0, 255]
-let bytes: [Byte] = [[Byte]](repeating: pattern, count: 20000).flatMap { $0 }
+let TRAIN = 0
+let TEST = 1
+private let dataset = MNIST()
+private let images = dataset.images[TRAIN]
+private let labels = dataset.labels[TRAIN]
+let data = [Byte](images[0] as! Vector)
 struct Bmp: View {
-	let bitmap = Bitmap(width: 200, height: 200, bytes: bytes, channel: 3)
+	let bitmap = Bitmap(width: 28, height: 28, bytes: data, channel: 1)
 	var body: some View {
 		Image(bitmap)
 			.resizable()
 			.aspectRatio(1, contentMode: .fit)
+			.overlay(Text("\(labels.vector[0])").foregroundColor(.red))
 	}
 }
 
 struct ContentView: View {
     var body: some View {
 		VStack {
-			SinCos().border(Color.white).padding()
-			SigmoidStep().border(Color.white).padding()
-			ReLUSoftmax().border(Color.white).padding()
-		}//.background(Bmp())
+			Bmp()
+//			SinCos().border(Color.white).padding()
+//			SigmoidStep().border(Color.white).padding()
+//			ReLUSoftmax().border(Color.white).padding()
+		}
     }
 }
 
@@ -97,9 +103,4 @@ func forward(_ input: Tensor) -> Tensor {
 }
 
 func test() {
-	//let input = Tensor([1, 0.5])
-	let input = Tensor([1010, 1000, 990])
-	
-	let output = softmax(input)
-	print(output)
 }

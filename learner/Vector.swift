@@ -7,9 +7,13 @@ typealias Vector = [Scalar]
 infix operator .+
 infix operator •: MultiplicationPrecedence	/// option + 8
 prefix operator ∑							/// option + w
+extension Array where Element == Byte {
+	init(_ vector: [Scalar]) {
+		self = vDSP.floatingPointToInteger(vector, integerType: Byte.self, rounding: .towardNearestInteger)	}
+}
 extension Vector {
 	init(_ bytes: [Byte]) {
-		self = vDSP.integerToFloatingPoint(bytes, floatingPointType: Float.self)
+		self = vDSP.integerToFloatingPoint(bytes, floatingPointType: Scalar.self)
 	}
 	init(count: Int, as value: Scalar? = nil) {
 		self.init(repeating: value ?? 0, count: count)
@@ -65,6 +69,30 @@ extension Vector {
 	static prefix func ∑(rhs: [Scalar]) -> Scalar {
 		vDSP.sum(rhs)
 	}
+	static func /=(lhs: inout [Scalar], rhs: [Scalar]) {
+		lhs = lhs / rhs
+	}
+	static func *=(lhs: inout [Scalar], rhs: [Scalar]) {
+		lhs = lhs * rhs
+	}
+	static func +=(lhs: inout [Scalar], rhs: [Scalar]) {
+		lhs = lhs + rhs
+	}
+	static func -=(lhs: inout [Scalar], rhs: [Scalar]) {
+		lhs = lhs - rhs
+	}
+	static func /=(lhs: inout [Scalar], rhs: Scalar) {
+		lhs = lhs / rhs
+	}
+	static func *=(lhs: inout [Scalar], rhs: Scalar) {
+		lhs = lhs * rhs
+	}
+	static func +=(lhs: inout [Scalar], rhs: Scalar) {
+		lhs = lhs + rhs
+	}
+	static func -=(lhs: inout [Scalar], rhs: Scalar) {
+		lhs = lhs - rhs
+	}
 	func max() -> Scalar {
 		vDSP.maximum(self)
 	}
@@ -116,4 +144,14 @@ func softmax(_ array: [Scalar]) -> [Scalar] {
 	let c = array.max()
 	let exp_a = exp(array - c)
 	return exp_a / sum(exp_a)
+}
+extension Vector {
+	func reconstruct(as shape: [UInt]) -> Any {
+		var result: [Any] = self
+		let dimension = shape.count
+		for n in 1..<dimension {
+			result = shape[n] == 1 ? result : result.group(by: shape[n])
+		}
+		return result
+	}
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9B6467B326FDF902003A8047 /* MNIST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6467B226FDF902003A8047 /* MNIST.swift */; };
 		9B6467B726FDFC2F003A8047 /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6467B626FDFC2F003A8047 /* Bitmap.swift */; };
+		9B712615270093E100E61056 /* Shell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B712614270093E100E61056 /* Shell.swift */; };
 		9BDD647B26F1601100AE7A06 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD647A26F1601100AE7A06 /* Assets.xcassets */; };
 		9BDD648826F1604300AE7A06 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD648526F1604300AE7A06 /* ContentView.swift */; };
 		9BDD648926F1604300AE7A06 /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BDD648626F1604300AE7A06 /* Vector.swift */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		9B6467B226FDF902003A8047 /* MNIST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MNIST.swift; sourceTree = "<group>"; };
 		9B6467B626FDFC2F003A8047 /* Bitmap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
+		9B712614270093E100E61056 /* Shell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shell.swift; sourceTree = "<group>"; };
 		9BDD647326F1601000AE7A06 /* learner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = learner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BDD647A26F1601100AE7A06 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BDD648526F1604300AE7A06 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 				9BDD64A426F49B7200AE7A06 /* Extension.swift */,
 				9BDD649C26F2B11700AE7A06 /* LogicGate.swift */,
 				9B6467B226FDF902003A8047 /* MNIST.swift */,
+				9B712614270093E100E61056 /* Shell.swift */,
 				9BDD647A26F1601100AE7A06 /* Assets.xcassets */,
 			);
 			path = learner;
@@ -157,6 +160,7 @@
 			files = (
 				9BDD64A326F46DD000AE7A06 /* Tensor.swift in Sources */,
 				9B6467B326FDF902003A8047 /* MNIST.swift in Sources */,
+				9B712615270093E100E61056 /* Shell.swift in Sources */,
 				9BDD648926F1604300AE7A06 /* Vector.swift in Sources */,
 				9BDD64A526F49B7200AE7A06 /* Extension.swift in Sources */,
 				9BDD648826F1604300AE7A06 /* ContentView.swift in Sources */,
